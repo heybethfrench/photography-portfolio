@@ -9,6 +9,29 @@
 <div class="container body-content">
     <h1>Login</h1>
 
+    <form>
+        <table>
+            <tr>
+                <td><label>Username</label></td>
+                <td>
+                    <input name="username" type="text" th:value="${username}"></input>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Password</label></td>
+                <td>
+                    <input name="password" type="password"></input>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+
+
+    <p>Don't have an account? <a href="/signup">Create one!</a></p>
+
 </div>
 
 </body>
