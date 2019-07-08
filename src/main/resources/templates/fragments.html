@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
 
@@ -7,8 +7,25 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <link th:href="@{/css/photographyportfolio.css}" rel="stylesheet" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
     <title th:text="'Photography Portfolio' + ${title == null ? '' : ' :: ' + title}">Photography Portfolio</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title th:text="${pageTitle}">Title HERE</title>
+
+    <style type="text/css">
+
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+
+
 </head>
 
 <body>
@@ -16,27 +33,19 @@
 <div th:fragment ="page-header">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Home</a>
+        <a class="navbar-brand" href="/">Photography</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/categories">Portfolio <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/signup">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Log Out</a>
+                <li th:each="item : ${navBarYo}" class="nav-item">
+                    <a class="nav-link" th:href="'/' + ${item}" th:text="${item}"></a>
                 </li>
             </ul>
         </div>
+
     </nav>
 
 </div>

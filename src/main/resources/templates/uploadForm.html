@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<html xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+
+<div class="container body-content">
+<h2>Admin Panel</h2>
+    <form method="POST" enctype="multipart/form-data" action="/file">
+        <table>
+            <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+            <div class="form-group">
+                <p>Color</p>
+                <select name ="color">
+                    <option class ="form-control" value="red">Red</option>
+                    <option class ="form-control" value="yellow">Yellow</option>
+                    <option class ="form-control" value="pink">Pink</option>
+                    <option class ="form-control" value="green">Green</option>
+                    <option class ="form-control" value="orange">Orange</option>
+                    <option class ="form-control" value="blue">Blue</option>
+                    <option class ="form-control" value="brown">Brown</option>
+                    <option class ="form-control" value="black">Black</option>
+                    <option class ="form-control" value="white">White</option>
+                </select>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+        </table>
+
+    </form>
+</div>
+
+</body>
+</html>
+</body>
+</html>

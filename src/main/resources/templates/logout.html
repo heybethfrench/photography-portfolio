@@ -7,8 +7,14 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h1>Bye!</h1>
-    <p>See you next time</p>
+    <h1>Are you sure?</h1>
+    <form method=post action="/logout">
+
+
+        <input type="submit" value="yes, please" />
+        <input action="post" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+    </form>
 
 </div>
 

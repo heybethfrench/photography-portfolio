@@ -7,7 +7,48 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h1>You did it!</h1>
+    <div class="img-row">
+        <th:block th:with="nColumns = 4">
+            <th:block th:each="column: ${#numbers.sequence(0, nColumns-1)}">
+                <div class="img-column">
+                    <img th:each="index : ${#numbers.sequence(column, #lists.size(photographs)-1, nColumns)}"
+                         th:src="${'/file/' + photographs[index].uuid}" class="img-fluid" style="width:100%"/>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+</div>
+
+
+<!--
+<div class="container body-content">
+
+    <div class="row">
+        <div class="column">
+            <img th:src="@{/black/black (1).jpg}" style="width:100%"/>
+            <img th:src="@{/thumbnail-images/black.jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (5).jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (11).jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (8).jpg}" style="width:100%"/>
+        </div>
+        <div class="column">
+            <img th:src="@{/black/black (3).jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (4).jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (2).jpg}" style="width:100%"/>
+        </div>
+        <div class="column">
+            <img th:src="@{/black/black (6).jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (7).jpg}" style="width:100%"/>
+
+        </div>
+        <div class="column">
+            <img th:src="@{/black/black (9).jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (10).jpg}" style="width:100%"/>
+            <img th:src="@{/black/black (12).jpg}" style="width:100%"/>
+        </div>
+    </div>
+-->
+
 
 </div>
 

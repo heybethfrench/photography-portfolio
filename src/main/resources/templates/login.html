@@ -7,30 +7,28 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h1>Login</h1>
+    <h2>Login</h2>
 
-    <form>
-        <table>
-            <tr>
-                <td><label>Username</label></td>
-                <td>
-                    <input name="username" type="text" th:value="${username}"></input>
-                </td>
-            </tr>
-            <tr>
-                <td><label>Password</label></td>
-                <td>
-                    <input name="password" type="password"></input>
-                </td>
-            </tr>
-        </table>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-    <br>
+    <form method="post">
 
+        <div class="form-group">
+            <label for="username"/>
+            <input type="text" name="username" id="username" placeholder="E-mail address" autocomplete="off"/>
+        </div>
 
-    <p>Don't have an account? <a href="/signup">Create one!</a></p>
+        <div class="form-group">
+            <label for="password"/>
+            <input type="password" name="password" id="password" placeholder="Password" autocomplete="off"/>
+        </div>
+
+<div th:if="${param.error}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Login not accepted:
+    <span th:text="${errorMsg}">Wrong input!</span>
+</div>
+
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+<input type="submit" value="login">
+
+</form>
 
 </div>
 
