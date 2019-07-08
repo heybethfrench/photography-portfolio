@@ -3,6 +3,7 @@ package com.bethfrench.photographyportfolio.controllers;
 import com.bethfrench.photographyportfolio.models.MyUserPrincipal;
 import com.bethfrench.photographyportfolio.models.Photograph;
 import com.bethfrench.photographyportfolio.models.dao.PhotographRepository;
+import com.bethfrench.photographyportfolio.models.navbar.NavBarLink;
 import com.bethfrench.photographyportfolio.storage.StorageException;
 import com.bethfrench.photographyportfolio.storage.StorageFileNotFoundException;
 import com.bethfrench.photographyportfolio.storage.StorageService;
@@ -28,9 +29,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import static com.bethfrench.photographyportfolio.models.navbar.NavBarData.makeMyNavBar;
 
 
-    @Controller
+@Controller
     @RequestMapping("file")
     public class FileController {
 
@@ -47,34 +49,10 @@ import java.util.stream.StreamSupport;
         @GetMapping("")
         public String listUploadedFiles(Model model, HttpServletRequest request) throws IOException {
 
-            HttpSession mySession = request.getSession();
-            model.addAttribute("session", mySession);
-
-            ArrayList<String> navBarYo = new ArrayList<String>();
-
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username;
-            if (principal instanceof MyUserPrincipal) {
-                username = ((MyUserPrincipal) principal).getUsername();
-            } else {
-                username = principal.toString();
-            }
-
-            model.addAttribute("username", username);
-
-
-            if (username.equals("anonymousUser")) {
-                navBarYo.add("categories");
-                navBarYo.add("login");
-                navBarYo.add("signup");
-            }if (!username.equals("anonymousUser")) {
-                navBarYo.add("categories");
-                navBarYo.add("logout");
-            } if (username.equals("admin@admin")){
-                navBarYo.add("file");
-            }
-
+            ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+            makeMyNavBar(navBarYo);
             model.addAttribute("navBarYo", navBarYo);
+
 
 
             Iterable<Photograph> files = photographRepository.findAll();
@@ -116,39 +94,11 @@ import java.util.stream.StreamSupport;
         @PostMapping("")
         public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                        @RequestParam("color") String color,
-                                       RedirectAttributes redirectAttributes, Model model,
-                                       HttpServletRequest request) {
+                                       RedirectAttributes redirectAttributes, Model model) {
 
-            HttpSession mySession = request.getSession();
-            model.addAttribute("session", mySession);
-
-            ArrayList<String> navBarYo = new ArrayList<String>();
-
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username;
-            if (principal instanceof MyUserPrincipal) {
-                username = ((MyUserPrincipal) principal).getUsername();
-            } else {
-                username = principal.toString();
-            }
-
-            model.addAttribute("username", username);
-
-
-            if (username.equals("anonymousUser")) {
-                navBarYo.add("categories");
-                navBarYo.add("login");
-                navBarYo.add("signup");
-            }if (!username.equals("anonymousUser")) {
-                navBarYo.add("categories");
-                navBarYo.add("logout");
-            } if (username.equals("admin@admin")){
-                navBarYo.add("file");
-            }
-
+            ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+            makeMyNavBar(navBarYo);
             model.addAttribute("navBarYo", navBarYo);
-
-
 
             Photograph uf = new Photograph();
 

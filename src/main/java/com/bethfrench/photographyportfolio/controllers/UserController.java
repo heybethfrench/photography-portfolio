@@ -6,6 +6,7 @@ import com.bethfrench.photographyportfolio.models.MyUserPrincipal;
 import com.bethfrench.photographyportfolio.models.User;
 import com.bethfrench.photographyportfolio.models.dao.MyGrantAuthorityRepository;
 import com.bethfrench.photographyportfolio.models.dao.UserRepository;
+import com.bethfrench.photographyportfolio.models.navbar.NavBarLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.bethfrench.photographyportfolio.models.navbar.NavBarData.makeMyNavBar;
+
 @Controller
 public class UserController {
 
@@ -30,74 +33,22 @@ public class UserController {
     private MyGrantAuthorityRepository grantRepo;
 
     @GetMapping("/login")
-    public String getLoginPage(Model model, HttpServletRequest request) {
+    public String getLoginPage(Model model) {
 
-        HttpSession mySession = request.getSession();
-        model.addAttribute("session", mySession);
-
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof MyUserPrincipal) {
-            username = ((MyUserPrincipal) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        model.addAttribute("username", username);
-
-
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        } if (!username.equals("anonymousUser")) {
-            navBarYo.add("/categories");
-            navBarYo.add("/logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("/file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
         return "login";
     }
 
     @GetMapping("/signup")
-    public String getSignupPage(Model model, HttpServletRequest request) {
+    public String getSignupPage(Model model) {
         model.addAttribute(new SignupForm());
 
-        HttpSession mySession = request.getSession();
-        model.addAttribute("session", mySession);
-
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof MyUserPrincipal) {
-            username = ((MyUserPrincipal) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        model.addAttribute("username", username);
-
-
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        } if (!username.equals("anonymousUser")) {
-            navBarYo.add("/categories");
-            navBarYo.add("/logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("/file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
         return "signup";
     }
@@ -110,35 +61,9 @@ public class UserController {
             Model model
     ) {
 
-        HttpSession mySession = request.getSession();
-        model.addAttribute("session", mySession);
-
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof MyUserPrincipal) {
-            username = ((MyUserPrincipal) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        model.addAttribute("username", username);
-
-
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
 
         if (errors.hasErrors()) {
@@ -178,43 +103,20 @@ public class UserController {
     @GetMapping("/logout")
     public String processLogout(Model model, HttpServletRequest request) {
 
-        HttpSession mySession = request.getSession();
-        model.addAttribute("session", mySession);
-
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof MyUserPrincipal) {
-            username = ((MyUserPrincipal) principal).getUsername();
-
-        } else {
-            username = principal.toString();
-        }
-
-        model.addAttribute("username", username);
-
-
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        } if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
+
 
         return "logout";
     }
 
     @PostMapping("/logout")
-    public String successfulLogout() {
+    public String successfulLogout(Model model) {
 
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
+        model.addAttribute("navBarYo", navBarYo);
 
         return "redirect:";
     }

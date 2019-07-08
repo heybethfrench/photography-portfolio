@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li th:each="item : ${navBarYo}" class="nav-item">
-                    <a class="nav-link" th:href="'/' + ${item}" th:text="${item}"></a>
+                    <a class="nav-link" th:href="${item.path}" th:text="${item.name}"></a>
                 </li>
             </ul>
         </div>

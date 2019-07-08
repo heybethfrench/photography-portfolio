@@ -3,7 +3,6 @@ package com.bethfrench.photographyportfolio.controllers;
 import com.bethfrench.photographyportfolio.models.MyUserPrincipal;
 import com.bethfrench.photographyportfolio.models.Photograph;
 import com.bethfrench.photographyportfolio.models.dao.PhotographRepository;
-import com.sun.org.apache.xerces.internal.util.HTTPInputSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 @Controller
 public class CategoryController {
