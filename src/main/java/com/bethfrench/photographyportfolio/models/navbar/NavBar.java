@@ -13,6 +13,7 @@ public class NavBar {
     private NavBarLink logout;
     private NavBarLink categories;
     private NavBarLink file;
+    private NavBarLink profile;
 
     private static NavBar ourInstance = new NavBar();
 
@@ -23,11 +24,12 @@ public class NavBar {
     public NavBar() {
     }
 
-    public NavBar(NavBarLink login, NavBarLink logout, NavBarLink categories, NavBarLink file) {
+    public NavBar(NavBarLink login, NavBarLink logout, NavBarLink categories, NavBarLink file, NavBarLink profile) {
         this.login = login;
         this.logout = logout;
         this.categories = categories;
         this.file = file;
+        this.profile = profile;
     }
 
     public int getId() {

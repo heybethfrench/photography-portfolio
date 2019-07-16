@@ -3,6 +3,7 @@ package com.bethfrench.photographyportfolio.controllers;
 import com.bethfrench.photographyportfolio.models.MyUserPrincipal;
 import com.bethfrench.photographyportfolio.models.Photograph;
 import com.bethfrench.photographyportfolio.models.dao.PhotographRepository;
+import com.bethfrench.photographyportfolio.models.navbar.NavBarLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+
+import static com.bethfrench.photographyportfolio.models.navbar.NavBarData.makeMyNavBar;
 
 @Controller
 public class CategoryController {
@@ -25,8 +28,6 @@ public class CategoryController {
             HttpSession mySession = request.getSession();
             model.addAttribute("session", mySession);
 
-            ArrayList<String> navBarYo = new ArrayList<String>();
-
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             String username;
             if (principal instanceof MyUserPrincipal) {
@@ -36,19 +37,8 @@ public class CategoryController {
             }
 
             model.addAttribute("username", username);
-
-
-            if (username.equals("anonymousUser")) {
-                navBarYo.add("categories");
-                navBarYo.add("login");
-                navBarYo.add("signup");
-            }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+            ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+            makeMyNavBar(navBarYo);
             model.addAttribute("navBarYo", navBarYo);
 
         return "display-categories";
@@ -60,8 +50,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserPrincipal) {
@@ -72,18 +60,8 @@ public class CategoryController {
 
         model.addAttribute("username", username);
 
-
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
 
         Iterable<Photograph> photographs = photographRepository.findAll();
@@ -105,8 +83,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserPrincipal) {
@@ -118,19 +94,9 @@ public class CategoryController {
         model.addAttribute("username", username);
 
 
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
         Iterable<Photograph> photographs = photographRepository.findAll();
         ArrayList<Photograph> blackPhotographs = new ArrayList<Photograph>();
@@ -151,8 +117,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserPrincipal) {
@@ -164,17 +128,9 @@ public class CategoryController {
         model.addAttribute("username", username);
 
 
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
+        model.addAttribute("navBarYo", navBarYo);
         model.addAttribute("navBarYo", navBarYo);
 
 
@@ -197,8 +153,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserPrincipal) {
@@ -210,17 +164,8 @@ public class CategoryController {
         model.addAttribute("username", username);
 
 
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
 
 
@@ -242,7 +187,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
@@ -254,20 +198,9 @@ public class CategoryController {
 
         model.addAttribute("username", username);
 
-
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
 
         Iterable<Photograph> photographs = photographRepository.findAll();
@@ -288,7 +221,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
@@ -301,19 +233,9 @@ public class CategoryController {
         model.addAttribute("username", username);
 
 
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
         Iterable<Photograph> photographs = photographRepository.findAll();
         ArrayList<Photograph> orangePhotographs = new ArrayList<Photograph>();
@@ -333,8 +255,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserPrincipal) {
@@ -346,19 +266,9 @@ public class CategoryController {
         model.addAttribute("username", username);
 
 
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
         Iterable<Photograph> photographs = photographRepository.findAll();
         ArrayList<Photograph> pinkPhotographs = new ArrayList<Photograph>();
@@ -379,7 +289,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
@@ -392,19 +301,9 @@ public class CategoryController {
         model.addAttribute("username", username);
 
 
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
-
 
 
         Iterable<Photograph> photographs = photographRepository.findAll();
@@ -426,8 +325,6 @@ public class CategoryController {
         HttpSession mySession = request.getSession();
         model.addAttribute("session", mySession);
 
-        ArrayList<String> navBarYo = new ArrayList<String>();
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserPrincipal) {
@@ -438,18 +335,8 @@ public class CategoryController {
 
         model.addAttribute("username", username);
 
-
-        if (username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("login");
-            navBarYo.add("signup");
-        }if (!username.equals("anonymousUser")) {
-            navBarYo.add("categories");
-            navBarYo.add("logout");
-        } if (username.equals("admin@admin")){
-            navBarYo.add("file");
-        }
-
+        ArrayList<NavBarLink> navBarYo = new ArrayList<>();
+        makeMyNavBar(navBarYo);
         model.addAttribute("navBarYo", navBarYo);
 
 

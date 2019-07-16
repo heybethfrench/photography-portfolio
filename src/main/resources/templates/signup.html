@@ -14,10 +14,20 @@
 
             <div class="form-group">
 
-                <input id="username" type="text" placeholder="Email" th:field="*{username}" name="username" />
+                <input id="username" type="email" placeholder="Email" th:field="*{username}" name="username" />
                 <div class="ui error message visible" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
             </div>
             <div class="form-group">
+                <input id="address" type="text" placeholder="Address" th:field="*{address}" name="address" />
+                <div class="ui error message visible" th:if="${#fields.hasErrors('address')}" th:error="*{address}">Address Error</div>
+            </div>
+            <div class="form-group">
+                <input id="phoneNumber" type="text" placeholder="Phone Number" th:field="*{phoneNumber}" name="phoneNumber" />
+                <div class="ui error message visible" th:if="${#fields.hasErrors('phoneNumber')}" th:error="*{address}">Address Error</div>
+            </div>
+            <div class="form-group">
+
+
 
                 <input
                         id="password"

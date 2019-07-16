@@ -1,11 +1,13 @@
 package com.bethfrench.photographyportfolio.SignupForm;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class SignupForm {
 
     @NotNull
+    @Email
     private String username;
 
     @NotNull
@@ -14,6 +16,12 @@ public class SignupForm {
 
     @NotNull
     private String confirmPassword;
+
+    @NotNull
+    public String address;
+
+    @NotNull
+    public String phoneNumber;
 
 
     public SignupForm() {}
@@ -45,5 +53,22 @@ public class SignupForm {
     public boolean passwordsMatch() {
         return confirmPassword.equals(password);
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 }
 

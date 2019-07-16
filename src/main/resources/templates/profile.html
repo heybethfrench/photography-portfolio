@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2 th:text="${'Welcome, ' + thisUsername}"></h2>
+    <p th:text="${thisAddress}"></p>
+    <p th:text="${thisPhoneNumber}"></p>
+
+
+
+</div>
+
+</body>
+</html>

@@ -2,20 +2,20 @@ package com.bethfrench.photographyportfolio.controllers;
 
 import com.bethfrench.photographyportfolio.SignupForm.SignupForm;
 import com.bethfrench.photographyportfolio.models.MyGrantAuthority;
-import com.bethfrench.photographyportfolio.models.MyUserPrincipal;
 import com.bethfrench.photographyportfolio.models.User;
 import com.bethfrench.photographyportfolio.models.dao.MyGrantAuthorityRepository;
 import com.bethfrench.photographyportfolio.models.dao.UserRepository;
 import com.bethfrench.photographyportfolio.models.navbar.NavBarLink;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -87,7 +87,7 @@ public class UserController {
         // Create user
         Set<MyGrantAuthority> grants = new HashSet<>();
         grants.add(grantRepo.getByRole("USER"));
-        User user = new User(form.getUsername(), grants, form.getPassword());
+        User user = new User(form.getUsername(), grants, form.getPassword(), form.getAddress(), form.getPhoneNumber());
         userRepository.save(user);
 
         // Add user to session

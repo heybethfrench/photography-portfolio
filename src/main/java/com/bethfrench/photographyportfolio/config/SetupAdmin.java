@@ -1,15 +1,15 @@
 package com.bethfrench.photographyportfolio.config;
 
 import com.bethfrench.photographyportfolio.models.MyGrantAuthority;
-import com.bethfrench.photographyportfolio.models.dao.MyGrantAuthorityRepository;
 import com.bethfrench.photographyportfolio.models.User;
+import com.bethfrench.photographyportfolio.models.dao.MyGrantAuthorityRepository;
 import com.bethfrench.photographyportfolio.models.dao.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+
 import java.util.HashSet;
 
 
@@ -52,7 +52,7 @@ public class SetupAdmin implements CommandLineRunner {
         }
 
 
-        User admin = userRepository.findByUsername("admin@admin");
+        User admin = userRepository.findByUsername("admin@admin.com");
 
         if (admin != null) {
             LOG.info("Admin user exists, doing nothing...");
@@ -60,7 +60,7 @@ public class SetupAdmin implements CommandLineRunner {
             LOG.info("Creating new admin user");
             HashSet<MyGrantAuthority> grants = new HashSet<>();
             grants.add(adminRole);
-            admin = new User("admin@admin", grants, "abc123");
+            admin = new User("admin@admin.com", grants, "abc123", "504 boop street", "6186186186");
             userRepository.save(admin);
         }
     }

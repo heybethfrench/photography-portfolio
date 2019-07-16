@@ -27,6 +27,14 @@ public class MyUserPrincipal implements UserDetails {
         return user.getUsername();
     }
 
+    public String getAddress() {
+        return user.getAddress();
+    }
+
+    public String getPhoneNumber() {
+        return user.getPhoneNumber();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return user.isAccountNonExpired();

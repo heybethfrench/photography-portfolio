@@ -4,8 +4,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -23,7 +21,14 @@ public class User {
 
     @NotNull
     @Column(unique=true)
+    @Email
     public String username;
+
+    @NotNull
+    public String address;
+
+    @NotNull
+    public String phoneNumber;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<MyGrantAuthority> authorities;
@@ -46,7 +51,7 @@ public class User {
         authorities = new HashSet<>();
     }
 
-    public User(String username, Set<MyGrantAuthority> authorities, String password) {
+    public User(String username, Set<MyGrantAuthority> authorities, String password, String address, String phoneNumber) {
         this.username = username;
         this.authorities = authorities;
         this.setPassword(password);
@@ -54,6 +59,8 @@ public class User {
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
         this.enabled = true;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
 
@@ -136,5 +143,22 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 
 }

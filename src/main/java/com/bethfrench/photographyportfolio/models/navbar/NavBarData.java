@@ -8,17 +8,15 @@ import java.util.ArrayList;
 
 public class NavBarData <T extends NavBarLink> {
 
-    public static NavBarLink login = new NavBarLink("login", "/login");
-    public static NavBarLink categories = new NavBarLink("categories", "/categories");
-    public static NavBarLink signup = new NavBarLink("signup", "/signup");
-    public static NavBarLink logout = new NavBarLink("logout", "/logout");
-    public static NavBarLink fileUpload = new NavBarLink("file", "/file");
+    public static NavBarLink login = new NavBarLink("Login", "/login");
+    public static NavBarLink categories = new NavBarLink("Categories", "/categories");
+    public static NavBarLink signup = new NavBarLink("Signup", "/signup");
+    public static NavBarLink logout = new NavBarLink("Logout", "/logout");
+    public static NavBarLink fileUpload = new NavBarLink("Upload Photo", "/file");
+    public static NavBarLink profile = new NavBarLink("My Profile", "/profile");
 
 
     public static void makeMyNavBar(ArrayList<NavBarLink> navBarYo) {
-
-
-
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
@@ -35,7 +33,8 @@ public class NavBarData <T extends NavBarLink> {
         }if (!username.equals("anonymousUser")) {
             navBarYo.add(categories);
             navBarYo.add(logout);
-        } if (username.equals("admin@admin")){
+            navBarYo.add(profile);
+        } if (username.equals("admin@admin.com")){
             navBarYo.add(fileUpload);
         }
 

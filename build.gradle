@@ -31,5 +31,4 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	compile group: 'org.apache.tika', name: 'tika-core', version: '1.21'
 	compile 'mysql:mysql-connector-java'
-	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 }
